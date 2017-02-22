@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 20170221002902) do
   end
 
   create_table "friends", force: :cascade do |t|
-    t.integer  "friend1_id_id"
-    t.integer  "friend2_id_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["friend1_id_id"], name: "index_friends_on_friend1_id_id"
-    t.index ["friend2_id_id"], name: "index_friends_on_friend2_id_id"
+    t.integer  "friend1_id"
+    t.integer  "friend2_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend1_id"], name: "index_friends_on_friend1_id"
+    t.index ["friend2_id"], name: "index_friends_on_friend2_id"
   end
 
   create_table "transactions", force: :cascade do |t|
