@@ -1,10 +1,34 @@
 <h2>Welcome <%= @users[0].name %></h2>
-<ul>
-  <li><%= link_to 'Accounts', accounts_path %></li>
-  <li><%= link_to 'Friends', friends_path  %></li>
-  <li><%= link_to 'Transactions', transactions_path  %></li>
+
   <!--  <li> #<%#= #link_to 'Deposit', :controller => :transactions, :action => :deposits  %> </li> -->
   <!--  <li> #<%#= #link_to 'Withdraw', :controller => :transactions, :action => :withdraws  %> </li> -->
-</ul>
+<h1>Manage Users</h1>
+
+<table class="table table-hover">
+  <tr>
+    <td>User ID</td>
+    <td>User Name</td>
+    <td>User Email</td>
+    <td>Link to View</td>
+  </tr>
+
+  <% if !@users.nil? then @users.each do |user| %>
+          <tr>
+            <td><%= user.id %>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= link_to 'Show', user %></td>
+          </tr>
+      <% end %>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Account', new_account_path %>
+<br/>
+<%= link_to 'Back', users_path%>
+
+
 
 <%= link_to 'Logout', :controller => :sessions, :action => :destroy %>
