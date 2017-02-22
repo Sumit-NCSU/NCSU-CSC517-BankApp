@@ -38,16 +38,14 @@ ActiveRecord::Schema.define(version: 20170221002902) do
 
   create_table "transactions", force: :cascade do |t|
     t.string   "txn_type"
-    t.decimal  "amount",          precision: 7, scale: 2
-    t.integer  "from_account_id"
-    t.integer  "to_account_id"
+    t.decimal  "amount",         precision: 7, scale: 2
+    t.string   "from_account"
+    t.string   "to_account"
     t.datetime "start_date"
     t.datetime "effective_date"
     t.string   "status"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.index ["from_account_id"], name: "index_transactions_on_from_account_id"
-    t.index ["to_account_id"], name: "index_transactions_on_to_account_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "users", force: :cascade do |t|
