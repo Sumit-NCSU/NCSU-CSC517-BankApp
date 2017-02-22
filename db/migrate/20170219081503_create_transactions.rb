@@ -3,7 +3,7 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
     create_table :transactions do |t|
       t.string :txn_type
       t.decimal :amount, precision: 7, scale: 2
-      t.references :form_account, foreign_key: true
+      t.references :from_account, foreign_key: true
       t.references :to_account, foreign_key: true
       t.datetime :start_date
       t.datetime :effective_date
@@ -11,5 +11,6 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+	add_foreign_key :transactions, :accounts, column: :account_number
   end
 end
