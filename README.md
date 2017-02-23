@@ -1,5 +1,10 @@
 # README
 
+### Video Screencast of the application
+
+[Ruby Rails Submit 1 Screencast](https://drive.google.com/open?id=0B-jRC--qQjQYbnVUVXJ5eC11ZDQ "Heroku Rails Deploy Submit 1")
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
