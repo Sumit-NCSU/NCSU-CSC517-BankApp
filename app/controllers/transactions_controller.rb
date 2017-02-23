@@ -11,12 +11,25 @@ class TransactionsController < ApplicationController
 		@transaction = Transaction.new
 	end
 
-	def deposits
-
+	def deposit
+		@transaction = Transaction.new
+		render 'deposit'
 	end
 
-	def withdraws
+	def borrow
+		@transaction = Transaction.new
+		render 'borrow'
+	end
 
+  def lend
+    @transaction = Transaction.new
+    render 'lend'
+  end
+
+
+	def withdraw
+		@transaction = Transaction.new
+		render 'withdraw'
 	end
 	
 	def approve

@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_action :save_login_state, :only => [:new, :create]
 
   def new
-    render 'new'
+    render 'new', :layout => false
   end
 
   def create
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       session[:user_id] = authorized_user.id
       flash[:notice] = "Welcome, you are logged in as #{authorized_user.name}"
       flash[:color] = 'valid'
-      redirect_to :controller => 'users', :action => 'index'
+      redirect_to :controller => 'sessions', :action => 'index'
     else
       flash[:notice] = 'Invalid Username or Password'
       flash[:color] = 'invalid'
@@ -25,15 +25,15 @@ class SessionsController < ApplicationController
     redirect_to :action => 'create'
   end
 
-  def home
-    redirect_to 'session/index'
-  end
-
   def profile
 
   end
 
   def setting
+
+  end
+
+  def home
 
   end
 end

@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
 	def account_params
-		params.require(:account).permit(:account_number, :status, :balance)
+		params.require(:account).permit(:account_number, :status, :balance, :user_id)
 	end
 	
 	def index
