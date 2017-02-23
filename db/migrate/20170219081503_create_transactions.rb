@@ -10,7 +10,6 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.string :status
 
       t.timestamps
-    end
-	add_foreign_key :transactions, :accounts, column: :account_number
+    end	
   end
 end
