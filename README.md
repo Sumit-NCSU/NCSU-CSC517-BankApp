@@ -2,28 +2,29 @@
 
 ### Video Screencast of the application
 
-[Ruby Rails Submit 1 Screencast](https://drive.google.com/open?id=0B-jRC--qQjQYbnVUVXJ5eC11ZDQ "Heroku Rails Deploy Submit 1")
+[Ruby Rails Submit 1 Screencast](https://youtu.be/R8wiwcZe0dQ "Heroku Rails Deploy Submit 1")
 
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
 
 * Ruby version 2.3.3
+* Rails version 5.0.1
 
-* System dependencies
+* System dependencies Application developed on a Windows system.
 
-* Configuration
+* Configuration Files:
+*   /config/database.yml
+*   Gemfile
 
-* Database creation
+* Database creation: 
+*   PostgreSQL on Heroku Production.
+*   Sqlite3 on local Development and Testing.
 
-* Database initialization
+* Database initialization is done through the following files after migrating the database:
+*   /db/seed.rb
 
-* How to run the test suite
+* How to run the test suite:
+*   TODO: Pending
 
-* Services (job queues, cache servers, search engines, etc.)
+* Services (job queues, cache servers, search engines, etc.): NA
 
-* Deployment instructions
-
-* ...
+* Deployment instructions: Deploy on Heroku using the following Guide:
+*   https://devcenter.heroku.com/articles/getting-started-with-rails5#local-workstation-setup
