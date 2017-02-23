@@ -2,6 +2,9 @@
 <h2>Welcome <%= authUser.name %></h2>
 
 <ul>
+
+  <li><%= link_to 'Edit Profile', :controller => :users, :action => :edit, id: session[:user_id] %></li>
+
   <% if authUser.is_admin %>
 
       <li><%= link_to 'Manage Admins', :controller => :users, :action => :index_admins %></li>
