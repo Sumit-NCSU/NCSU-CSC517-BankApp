@@ -1,11 +1,11 @@
 class TransactionsController < ApplicationController
 	before_action :authenticate_user
 	def transaction_params_deposit
-		params.require(:transaction).permit(:to_account_id, :amount)
+		params.require(:transaction).permit(:to_account, :amount)
 	end
 
 	def transaction_params_withdraw
-		params.require(:transaction).permit(:from_account_id, :amount)
+		params.require(:transaction).permit(:from_account, :amount)
 	end
 	def index
 		@transactions = Transaction.all
@@ -34,7 +34,7 @@ class TransactionsController < ApplicationController
 
 	def create_deposit
 		@transaction = Transaction.new(transaction_params_deposit)
-		@transaction.from_account_id = '-1'
+		@transaction.from_account = '-1'
 		@transaction.txn_type = 'deposit'
 		@transaction.status = 'pending'
 		if @transaction.save
@@ -63,7 +63,7 @@ class TransactionsController < ApplicationController
 
 	def create_withdraw
 		@transaction = Transaction.new(transaction_params_withdraw)
-		@transaction.to_account_id = '-1'
+		@transaction.to_account = '-1'
 		@transaction.txn_type = 'withdrawal'
 		@transaction.status = 'pending'
 		if @transaction.save

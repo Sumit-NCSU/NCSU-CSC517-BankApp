@@ -20,10 +20,10 @@ class Account < ApplicationRecord
 	end
 	
 	def get_pending_sent_transactions
-	self.sent_transactions.where(:approval_status => 'pending')
+		self.sent_transactions.where(:approval_status => 'pending')
 	end
 	
 	def get_pending_received_transactions
-	self.received_transactions.where(:approval_status => 'pending')
+		self.received_transactions.where(:approval_status => 'pending')
 	end
 end

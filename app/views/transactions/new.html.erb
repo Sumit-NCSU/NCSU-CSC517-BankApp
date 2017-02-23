@@ -16,8 +16,8 @@
       <%= f.select :txn_type, options_for_select(Transaction::TYPES), {}, {:multiple => false} %>
     </div>
     <div class="field">
-      Other Account (TODO: dynamically change either to_account_id or from_account_id somehow) <br />
-      <%= f.select :to_account_id, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
+      Other Account (TODO: dynamically change either to_account or from_account_id somehow) <br />
+      <%= f.select :to_account, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
     </div>
     <div class="field">
       <%= f.label :amount %><br />

@@ -22,7 +22,7 @@
       <hr>
       <div class="field">
         <b>Account ID to withdraw from: </b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <%= f.select :form_account_id, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
+        <%= f.select :from_account, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
       </div>
       <hr>
       <div class="field">
