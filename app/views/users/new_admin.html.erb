@@ -1,15 +1,14 @@
-<% @page_title = 'Sign Up' %>
-<h1>Sign Up</h1>
+<h1>Create Admin</h1>
 <p>
-  <%= form_for @user do |f|%>
+  <%= form_for @admin, :url => { :action => :create_admin } do |f|%>
     <p> Name: <br> <%= f.text_field :name %> </p>
     <p> Email: <br> <%= f.text_field :email %> </p>
     <p> Password: <br> <%= f.password_field :password %> </p>
     <p> Confirm Password: <br> <%= f.password_field :password %> </p>
-    <%= f.submit :Signup %>
+    <%= f.submit %>
 <% end %>
-<% if @user.errors.any? %>
-    <% @user.errors.full_messages.each do |error_message| %>
+<% if @admin.errors.any? %>
+    <% @admin.errors.full_messages.each do |error_message| %>
         <%= error_message %> <br>
     <% end %>
 <% end %>

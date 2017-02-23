@@ -12,12 +12,12 @@
   <% end %>
   <h3>Account: <%=:account_number%></h3>
   <div class="field">
-    <%= f.label :user%><br />
-    <%= f.select :user, options_for_select(User.all.collect {|p| [ p.name, p.id ] }), {}, {:multiple => false, :class => "user-select" } %>
+    <%= f.label :user_id %><br />
+    <%= f.collection_select :user_id, User.allPlain, :id , :name, prompt: true %>
   </div>
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.select :status, options_for_select(Account::STATUS_OPTIONS), {}, {:multiple => false, :class => "status-select" } %>
+    <%= f.select :status, options_for_select(Account::STATUS_OPTIONS, :selected => f.object.status), {:include_blank => "Please select"}, {:multiple => false} %>
   </div>
   <div class="actions">
     <%= f.submit %>

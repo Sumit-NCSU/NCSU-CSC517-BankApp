@@ -1,0 +1,45 @@
+<h1>Borrow from a friend </h1>
+<hr>
+<hr>
+<div class="container">
+  <%= form_for @transaction do |f| %>
+      <% if @transaction.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+            <ul>
+              <% @transaction.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <div class="field">
+        <%= f.label :txn_type, :value => 'Transaction Type'%>&nbsp;&nbsp;&nbsp;&nbsp;
+        <%=Transaction::TYPES[3] %> <br />
+      </div>
+      <hr>
+      <div class="field">
+        <b>Select an account to borrow from: </b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- Display list of friends account ids for form_account_id-->
+        <%= f.select :to_account_id, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
+      </div>
+      <hr>
+      <div class="field">
+        <b>Select an account to transfer to: </b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- Display list of all accounts for this username -->
+        <%= f.select :to_account_id, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
+      </div>
+
+      <hr>
+      <div class="field">
+        <%= f.label :amount %>&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= f.text_field :amount %>
+      </div>
+      <hr>
+      <div class="actions">
+        <%= f.submit :value =>  'Borrow Request' %>
+      </div>
+
+  <% end %>
+</div>

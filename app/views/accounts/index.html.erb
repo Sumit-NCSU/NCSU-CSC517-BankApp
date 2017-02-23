@@ -1,6 +1,6 @@
 <h1>Manage Accounts</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Account Number</th>
     <th>Link to View</th>
@@ -19,4 +19,4 @@
 
 <%= link_to 'New Account', new_account_path %> 
 <br/>
-<%= link_to 'Back', users_path%>
+<%= link_to 'Back', :controller => :sessions, :action => :index %>

@@ -1,15 +1,23 @@
-<h2>Welcome <%= @users[0].name %></h2>
+<% authUser = User.find(session[:user_id]) %>
 
-  <!--  <li> #<%#= #link_to 'Deposit', :controller => :transactions, :action => :deposits  %> </li> -->
-  <!--  <li> #<%#= #link_to 'Withdraw', :controller => :transactions, :action => :withdraws  %> </li> -->
+<% if authUser.is_admin %>
+
+<!--  <li> #<%#= #link_to 'Deposit', :controller => :transactions, :action => :deposits  %> </li> -->
+<!--  <li> #<%#= #link_to 'Withdraw', :controller => :transactions, :action => :withdraws  %> </li> -->
+<% if @showing_admins %>
+<h1>Manage Admins</h1>
+<% else %>
 <h1>Manage Users</h1>
+<% end %>
+
+    <p id="notice"><%= notice %></p>
 
 <table class="table table-hover">
   <tr>
     <td>User ID</td>
     <td>User Name</td>
     <td>User Email</td>
-    <td>Link to View</td>
+    <td>Link to <% if @showing_admins %>Delete Admin<%else%>View<%end%></td>
   </tr>
 
   <% if !@users.nil? then @users.each do |user| %>
@@ -17,7 +25,13 @@
             <td><%= user.id %>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
-            <td><%= link_to 'Show', user %></td>
+            <td>
+              <% if @showing_admins %>
+                <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure you want to delete this account?' } %>
+              <%else%>
+                <%=link_to 'Show', user %>
+              <%end%>
+            </td>
           </tr>
       <% end %>
   <% end %>
@@ -25,10 +39,10 @@
 
 <br />
 
-<%= link_to 'New Account', new_account_path %>
-<br/>
-<%= link_to 'Back', users_path%>
+<%if @showing_admins%><%= link_to 'Create Admin', :controller => :users, :action => :new_admin  %><br />
+<%else %><%= link_to 'New Account', new_account_path %><br/>
+<% end %>
 
+<% end %>
 
-
-<%= link_to 'Logout', :controller => :sessions, :action => :destroy %>
+<%= link_to 'Back', home_path%>

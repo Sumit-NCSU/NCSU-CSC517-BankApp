@@ -1,26 +1,38 @@
-<h1>User Transactions</h1>
+<% authUser = User.find(session[:user_id]) %>
 
-<table>
-  <tr>
-    <th>Transaction Date</th>
-    <th>Transaction Type</th>
-    <th>Amount</th>
-    <th>Status</th>
-    <th>Actions</th>
-  </tr>
-  <% @transactions.each do |transaction| %>
+<% if authUser.is_admin %>
+
+    <h1>Pending Transactions</h1>
+
+    <%= render 'transactions/pending_transactions' , :transactions => @transactions.where({status:'pending'}) %>
+
+<% else %>
+
+    <h1>My Transactions: TODO filter to this users! </h1>
+
+    <table class="table table-striped">
       <tr>
-        <td><%= transaction.effective_date %></td>
-        <td><%= transaction.txn_type %></td>
-        <td><%= transaction.amount %></td>
-        <td><%= transaction.status %></td>
-        <% if transaction.status = 'Pending' %>
-          <td>Cancel</td>
-        <% else %>
-          <td></td>
-        <% end %>
+        <th>Transaction Date</th>
+        <th>Transaction Type</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Actions</th>
       </tr>
-  <% end %>
-</table>
+      <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction.effective_date %></td>
+            <td><%= transaction.txn_type %></td>
+            <td><%= transaction.amount %></td>
+            <td><%= transaction.status %></td>
+            <% if transaction.status = 'Pending' %>
+                <td>Cancel</td>
+            <% else %>
+                <td></td>
+            <% end %>
+          </tr>
+      <% end %>
+    </table>
 
-<%= link_to 'Back', users_path %>
+<% end %>
+
+<%= link_to 'Back', :controller => :sessions, :action => :index %>

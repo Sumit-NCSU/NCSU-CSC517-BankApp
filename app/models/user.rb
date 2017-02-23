@@ -22,4 +22,8 @@ class User < ApplicationRecord
     end
   end
 
+  def self.allPlain
+    User.where(:is_admin=>false)
+  end
+
 end

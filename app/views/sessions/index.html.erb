@@ -1,11 +1,23 @@
-<h1>User Page</h1>
-<h2>Welcome <%= @user.name %></h2>
-<ul>
-  <li><%= link_to 'Accounts', accounts_path %></li>
-  <li><%= link_to 'Friends', friends_path  %></li>
-  <li><%= link_to 'Transactions', transactions_path  %></li>
-  <!--  <li> #<%#= #link_to 'Deposit', :controller => :transactions, :action => :deposits  %> </li> -->
-  <!--  <li> #<%#= #link_to 'Withdraw', :controller => :transactions, :action => :withdraws  %> </li> -->
-</ul>
+<% authUser = User.find(session[:user_id]) %>
+<h2>Welcome <%= authUser.name %></h2>
 
-<%= link_to 'Logout', :controller => :sessions, :action => :destroy %>
+<ul>
+  <% if authUser.is_admin %>
+
+      <li><%= link_to 'Manage Admins', :controller => :users, :action => :index_admins %></li>
+      <li><%= link_to 'Manage Users', :controller => :users, :action => :index_users %></li>
+      <li><%= link_to 'Manage Accounts', accounts_path %></li>
+      <li><%= link_to 'Manage Transactions', transactions_path  %></li>
+
+  <% else %>
+
+      <li><%= link_to 'Accounts', accounts_path %></li>
+      <li><%= link_to 'Friends', friends_path  %></li>
+      <li><%= link_to 'View Transactions', transactions_path  %></li>
+      <li><%= link_to 'Make a deposit', :controller => :transactions, :action => :deposit %> </li>
+      <li><%= link_to 'Make a withdrawal', :controller => :transactions, :action => :withdraw  %> </li>
+      <li><%= link_to 'Borrow from a friend', :controller => :transactions, :action => :borrow %> </li>
+      <li><%= link_to 'Send to a friend', :controller => :transactions, :action => :lend %> </li>
+
+  <% end %>
+</ul>
