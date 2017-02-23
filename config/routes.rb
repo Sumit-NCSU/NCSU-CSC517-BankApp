@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   get 'borrow' => 'transactions#borrow'
   get 'lend' => 'transactions#lend'
   delete 'logout' => 'sessions#destroy'
-
+  get 'deposit' => 'transactions#create_deposit'
+  post 'deposit' => 'transactions#create_deposit'
+  get 'withdraw' => 'transactions#create_withdraw'
+  post 'withdraw' => 'transactions#create_withdraw'
   get 'friends/search' => 'friends#search'
 
   resources :users
