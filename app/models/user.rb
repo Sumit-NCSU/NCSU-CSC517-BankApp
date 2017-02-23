@@ -26,4 +26,8 @@ class User < ApplicationRecord
     User.where(:is_admin=>false)
   end
 
+  def is_default
+    id == 0
+  end
+
 end

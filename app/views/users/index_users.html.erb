@@ -1,0 +1,32 @@
+<% authUser = User.find(session[:user_id]) %>
+
+<% if authUser.is_admin %>
+
+<h1>Manage Users</h1>
+
+<p id="notice"><%= notice %></p>
+
+<table class="table table-hover">
+  <tr>
+    <td>User ID</td>
+    <td>User Name</td>
+    <td>User Email</td>
+    <td>View User</td>
+  </tr>
+
+  <% if !@users.nil? then @users.each do |user| %>
+          <tr>
+            <td><%= user.id %>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%=link_to 'Show', user %></td>
+          </tr>
+      <% end %>
+  <% end %>
+</table>
+
+<br />
+
+<% end %>
+
+<%= link_to 'Back', home_path%>

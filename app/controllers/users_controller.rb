@@ -3,14 +3,12 @@ class UsersController < ApplicationController
 
 	def index_users
 		@users = User.where({is_admin:false})
-		@showing_admins = false
-		render 'index'
+		render 'index_users'
 	end
 
 	def index_admins
-		@users = User.where({is_admin:true})
-		@showing_admins = true
-		render 'index'
+		@admins = User.where({is_admin:true})
+		render 'index_admins'
 	end
 	
 	def show
@@ -28,10 +26,10 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			flash[:notice] = 'User created successfully'
+			flash[:notice] = 'User was created successfully.'
 			flash[:color] = 'valid'
 		else
-			flash[:notice] = 'User not created'
+			flash[:notice] = 'User not created.'
 			flash[:color] = 'invalid'
 		end
 		redirect_to :controller => 'sessions', :action => 'create'
@@ -67,10 +65,13 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		@admin = User.find(params[:id])
-		#if !@admin.is_admin redirect_to @account, notice: 'Account was successfully deleted.'
-		if @admin.destroy
-			redirect_to '/admins', notice: 'Admin was successfully deleted.'
+		@user = User.find(params[:id])
+		if @user.destroy
+			if @user.is_admin
+				redirect_to '/admins', notice: 'Admin was successfully deleted.'
+			else
+				redirect_to '/users', notice: 'User was successfully deleted.'
+			end
 		else
 			render action:'index_admins' #TODO: add error printing
 		end

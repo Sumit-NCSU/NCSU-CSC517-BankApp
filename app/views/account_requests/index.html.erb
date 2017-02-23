@@ -1,0 +1,24 @@
+<h1>View Account Requests</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>User Name</th>
+    <th>User Email</th>
+    <th>Dismiss</th>
+  </tr>
+
+  <% if !@requests.nil? then @requests.each do |request| %>
+          <tr>
+            <td><%= request.user.name %></td>
+            <td><%= request.user.email %></td>
+            <td><%= link_to 'Dismiss', request, method: :delete %></td>
+          </tr>
+      <% end %>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'Manage Accounts', accounts_path %>
+<br/>
+<%= link_to 'Back', :controller => :sessions, :action => :index %>

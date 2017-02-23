@@ -1,4 +1,10 @@
+<% authUser = User.find(session[:user_id]) %>
+
+<% if authUser.is_admin %>
+
 <h1>Manage Accounts</h1>
+
+<p id="notice"><%= notice %></p>
 
 <table class="table table-striped">
   <tr>
@@ -20,3 +26,36 @@
 <%= link_to 'New Account', new_account_path %> 
 <br/>
 <%= link_to 'Back', :controller => :sessions, :action => :index %>
+
+<% else %>
+
+  <%@accounts = @accounts.where({user_id:authUser.id})%>
+
+  <h1>My Accounts</h1>
+
+  <p id="notice"><%= notice %></p>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Account Number</th>
+      <th>Balance</th>
+      <th>Status</th>
+    </tr>
+
+    <% if !@accounts.nil? then @accounts.each do |account| %>
+            <tr>
+              <td><%= account.account_number %></td>
+              <td><%= account.balance %></td>
+              <td><%= account.status %></td>
+            </tr>
+        <% end %>
+    <% end %>
+  </table>
+
+  <br />
+
+  <%= link_to 'Request Account', {:controller => :account_requests, :action => :create, :user_id => authUser.id }, {:method => :post} %>
+  <br/>
+  <%= link_to 'Back', :controller => :sessions, :action => :index %>
+
+<% end %>
