@@ -10,8 +10,6 @@ Watch the below Video for instructions on how to use the application:
 * Ruby version 2.3.3
 * Rails version 5.0.1
 
-* System dependencies Application developed on a Windows system.
-
 * Configuration Files:
   *   /config/database.yml
   *   Gemfile
