@@ -4,7 +4,7 @@
 
 Watch the below Video for instructions on how to use the application:
 
-[Ruby Rails Submit 1 Screencast](https://youtu.be/R8wiwcZe0dQ "Demo of Program 1: Bank Application ")
+[Demo of Program 1: Bank Application](https://youtu.be/R8wiwcZe0dQ "Demo of Program 1: Bank Application")
 
 
 * Ruby version 2.3.3
