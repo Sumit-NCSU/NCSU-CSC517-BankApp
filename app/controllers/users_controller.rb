@@ -57,7 +57,7 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if @user.update_attributes(user_params)
-			redirect_to users_path, notice: 'User profile successfully updated.'
+			redirect_to home_path, notice: 'User profile successfully updated.'
 		else
 			render action:'edit'
 		end

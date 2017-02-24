@@ -1,6 +1,8 @@
 <% authUser = User.find(session[:user_id]) %>
 <h2>Welcome <%= authUser.name %></h2>
 
+<p id="notice"><%= notice %></p>
+
 <ul>
 
   <li><%= link_to 'Edit Profile', :controller => :users, :action => :edit, id: session[:user_id] %></li>
