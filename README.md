@@ -1,6 +1,16 @@
 # README
 
-### Video Screencast
+### Program 1: Bank Application
+
+CSC517-Object Oriented Design and Development
+
+Default Admin Credentials:
+Email: admin@ncsu.edu
+Password: password
+
+Default User Credentials:
+Email: user@ncsu.edu
+Password: password
 
 Watch the below Video for instructions on how to use the application:
 
