@@ -1,24 +1,40 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Program 1: Bank Application
 
-Things you may want to cover:
+CSC517-Object Oriented Design and Development
+
+Default Admin Credentials:
+Email: admin@ncsu.edu
+Password: password
+
+Default User Credentials:
+Email: user@ncsu.edu
+Password: password
+
+Watch the below Video for instructions on how to use the application:
+
+[Demo of Program 1: Bank Application](https://youtu.be/R8wiwcZe0dQ "Demo of Program 1: Bank Application")
+
 
 * Ruby version 2.3.3
+* Rails version 5.0.1
 
-* System dependencies
+* Configuration Files:
+  *   /config/database.yml
+  *   Gemfile
 
-* Configuration
+* Database creation: 
+  *   PostgreSQL on Heroku Production.
+  *   Sqlite3 on local Development and Testing.
 
-* Database creation
+* Database initialization is done through the following files after migrating the database:
+  *   /db/seed.rb
 
-* Database initialization
+* How to run the test suite:
+  *   TODO: Pending
 
-* How to run the test suite
+* Services (job queues, cache servers, search engines, etc.): NA
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Deployment instructions: Deploy on Heroku using the following Guide:
+  *   https://devcenter.heroku.com/articles/getting-started-with-rails5#local-workstation-setup
