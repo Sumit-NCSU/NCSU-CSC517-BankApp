@@ -26,7 +26,7 @@
         <b>Select an account to borrow from: </b>&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- Display list of friends account ids for form_account_id-->
         <% if @friends_accounts %>
-        <%= f.collection_select :from_account, @friends_accounts, :id , :id %>
+        <%= f.collection_select :from_account_id, @friends_accounts, :id , :id %>
         <% else %>
           N/A
         <% end %>
@@ -36,7 +36,7 @@
         <b>Select an account to transfer to: </b>&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- Display list of all accounts for this username -->
         <% if @my_accounts %>
-            <%= f.collection_select :to_account, @my_accounts, :id , :id %>
+            <%= f.collection_select :to_account_id, @my_accounts, :id , :id %>
         <% else %>
             N/A
         <% end %>

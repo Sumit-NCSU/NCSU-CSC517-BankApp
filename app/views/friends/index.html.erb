@@ -1,14 +1,16 @@
 <h1>Friend List</h1>
 
-<table border="1">
+<p><%= flash[:notice] %></p>
+
+<table class="table table-striped">
   <tr>
     <th>Friend Name</th>
     <th>Actions</th>
   </tr>
   <% @friends.each do |friend| %>
       <tr>
-        <td><%= friend.friend2_id %></td>
-        <td>Transfer</td>
+        <td><%= User.find(friend.friend2_id).name %></td>
+        <td><%= link_to "Send", :controller => :transactions, :action => :lend %></td>
       </tr>
   <% end %>
 </table>

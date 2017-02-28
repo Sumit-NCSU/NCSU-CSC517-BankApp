@@ -48,17 +48,19 @@ class TransactionsController < ApplicationController
 	end
 
 	def create_withdraw
+		msg = nil
 		@transaction = Transaction.new(transaction_params_withdraw)
 		@transaction.to_account_id = nil
 		@transaction.txn_type = 'withdrawal'
 		if transaction_params_withdraw[:amount].to_d > 1000
 			@transaction.status = 'pending'
-			flash[:notice] = 'Withdraw was requested'
+			msg = 'Withdrawal was requested'
 		else
+			msg = 'Withdrawal was successful'
 			@transaction.approve
 		end
 		if @transaction.save
-			flash[:notice] = 'Withdrawal was successful'
+			flash[:notice] = msg
 		else
 			flash[:notice] = 'Sorry, withdrawal was not requested'
 		end

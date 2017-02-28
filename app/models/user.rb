@@ -34,4 +34,10 @@ class User < ApplicationRecord
     id == 0
   end
 
+
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%")
+    where("email LIKE ?", "%#{search}%")
+  end
+
 end

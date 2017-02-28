@@ -1,6 +1,7 @@
 <table class="table table-striped">
   <tr>
     <th>Amount</th>
+    <th>Transaction Type</th>
     <th>From</th>
     <th>To</th>
     <th>Approve</th>
@@ -10,6 +11,7 @@
   <% if !@transactions.nil? then @transactions.each do |txn| %>
           <tr>
             <td><%= txn.amount %></td>
+            <td><%= txn.txn_type %></td>
             <td><%= txn.from_account_id %></td>
             <td><%= txn.to_account_id %></td>
             <td>

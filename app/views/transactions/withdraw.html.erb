@@ -27,7 +27,7 @@
       <hr>
       <div class="field">
         <b>Account ID to withdraw from: </b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <%= f.collection_select :from_account, Account.where({user_id:authUser.id}), :id , :id%>
+        <%= f.collection_select :from_account_id, Account.where({user_id:authUser.id}), :id , :id %>
       </div>
       <hr>
       <div class="field">

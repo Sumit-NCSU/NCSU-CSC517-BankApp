@@ -1,17 +1,34 @@
 <H1>Search Friends</H1>
 <p>
-<%= form_tag(friends_path, :method => 'get', id: 'search-friends') do %>
+<%= form_tag({:controller => :friends, :action => :search}, :method => 'get', id: 'search-friends') do %>
     <p>
-      <%= 'Enter Full Name or Email' %>
-      <%= text_field_tag :search %>
+      <%= 'Enter name or email' %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Friends" %>
     </p>
     <%= submit_tag 'Search' %>
 <% end %>
 
 <% if @users.present? %>
-Users are present
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Add Friend</th>
+      </tr>
+
+      <% if !@users.nil? then @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= link_to 'Add Friend', {:controller => :friends, :action => :create, :friend_id => user.id}, :method => :post %></td>
+              </tr>
+          <% end %>
+      <% end %>
+    </table>
 <% else %>
-<p>No Users found Matching with <%= params[:search] %></p>
+    <p>No Users found matching the search <%= params[:search] %></p>
 <% end %>
+
+
 
 <%= link_to 'Back', friends_path %>
