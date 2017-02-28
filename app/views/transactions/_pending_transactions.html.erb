@@ -9,11 +9,17 @@
 
   <% if !@transactions.nil? then @transactions.each do |txn| %>
           <tr>
-            <td>txn.amount</td>
-            <td>txn.from_account</td>
-            <td>txn.to_account</td>
-            <td><%= link_to 'Approve', txn %></td>
-            <td><%= link_to 'Decline', txn %></td>
+            <td><%= txn.amount %></td>
+            <td><%= txn.from_account_id %></td>
+            <td><%= txn.to_account_id %></td>
+            <td>
+              <%= link_to 'Approve', {:controller => :transactions, :action => :approve,
+                                              :txn_id => txn.id }, {:method => :put} %>
+            </td>
+            <td>
+              <%= link_to 'Decline', {:controller => :transactions, :action => :decline,
+                                      :txn_id => txn.id }, {:method => :put} %>
+            </td>
           </tr>
       <% end %>
   <% end %>

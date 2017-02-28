@@ -14,7 +14,7 @@
 
   <% if !@accounts.nil? then @accounts.each do |account| %>
           <tr>
-            <td><%= account.account_number %></td>
+            <td><%= account.id %></td>
             <td><%= link_to 'Show', account %></td>
           </tr>
       <% end %>
@@ -44,7 +44,7 @@
 
     <% if !@accounts.nil? then @accounts.each do |account| %>
             <tr>
-              <td><%= account.account_number %></td>
+              <td><%= account.id %></td>
               <td><%= account.balance %></td>
               <td><%= account.status %></td>
             </tr>

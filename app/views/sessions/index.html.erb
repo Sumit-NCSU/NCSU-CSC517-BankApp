@@ -13,7 +13,7 @@
       <li><%= link_to 'Manage Users', :controller => :users, :action => :index_users %></li>
       <li><%= link_to 'Manage Accounts', accounts_path %></li>
       <li><%= link_to 'Manage Account Requests', account_requests_path  %></li>
-      <li><%= link_to 'Manage Transactions', transactions_path  %></li>
+      <li><%= link_to 'Manage Transactions', :controller => :transactions, :action => :manage  %></li>
 
   <% else %>
 

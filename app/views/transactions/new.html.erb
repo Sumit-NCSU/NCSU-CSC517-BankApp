@@ -17,7 +17,7 @@
     </div>
     <div class="field">
       Other Account (TODO: dynamically change either to_account or from_account_id somehow) <br />
-      <%= f.select :to_account, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
+      <%= f.select :to_account, options_for_select(Account.all.map {|a| a.id}), {}, {:multiple => false} %>
     </div>
     <div class="field">
       <%= f.label :amount %><br />

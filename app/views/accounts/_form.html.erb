@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <h3>Account: <%=:account_number%></h3>
+  <h3>Account: <%=:id%></h3>
   <div class="field">
     <%= f.label :user_id %><br />
     <%= f.collection_select :user_id, User.allPlain, :id , :name, prompt: true %>

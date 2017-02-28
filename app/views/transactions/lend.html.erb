@@ -1,8 +1,11 @@
 <h1>Send to a friend </h1>
-<hr>
-<hr>
+<% if !notice.nil? %>
+    <hr>
+    <h3 id="notice"><%= notice %></h3>
+    <hr>
+<% end %>
 <div class="container">
-  <%= form_for @transaction do |f| %>
+  <%= form_for @transaction, :url => { :action => :create_lend} do |f| %>
       <% if @transaction.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this account from being saved:</h2>
@@ -22,13 +25,21 @@
       <div class="field">
         <b>Select an account to send from: </b>&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- Display list of all accounts for this username -->
-        <%= f.select :to_account, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
+        <% if @my_accounts %>
+            <%= f.collection_select :from_account_id, @my_accounts, :id , :id, prompt: true %>
+        <% else %>
+            N/A
+        <% end %>
       </div>
       <hr>
       <div class="field">
         <b>Select an account to send to: </b>&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- Display list of friends account ids for form_account_id-->
-        <%= f.select :to_account, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
+        <% if @friends_accounts %>
+            <%= f.collection_select :to_account_id, @friends_accounts, :id , :id, prompt: true %>
+        <% else %>
+            N/A
+        <% end %>
       </div>
 
       <hr>

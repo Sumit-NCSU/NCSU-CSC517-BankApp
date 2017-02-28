@@ -1,11 +1,13 @@
 class TransactionsController < ApplicationController
 	before_action :authenticate_user
 	def transaction_params_deposit
-		params.require(:transaction).permit(:to_account, :amount)
+		params.require(:transaction).permit(:to_account_id, :amount)
 	end
-
 	def transaction_params_withdraw
-		params.require(:transaction).permit(:from_account, :amount)
+		params.require(:transaction).permit(:from_account_id, :amount)
+	end
+	def transaction_params_borrow_lend
+		params.require(:transaction).permit(:from_account_id, :to_account_id, :amount)
 	end
 	def index
 		@transactions = Transaction.all
@@ -15,16 +17,11 @@ class TransactionsController < ApplicationController
 		@transaction = Transaction.find(params[:id])
 	end
 
-	def new
-		@transaction = Transaction.new
-	end
-
-	def create
-		if @transaction.save
-			redirect_to @transaction, notice: 'Transaction was successful'
-		else
-			render action:'new'
-		end
+	def set_accounts
+		authUser = User.find(session[:user_id])
+		friends = authUser.friends.map {|u| u.id}
+		@friends_accounts = Account.select{|a|friends.include? a.user_id }
+		@my_accounts = Account.select{|a| a.user_id == authUser.id }
 	end
 
 	def deposit
@@ -34,26 +31,15 @@ class TransactionsController < ApplicationController
 
 	def create_deposit
 		@transaction = Transaction.new(transaction_params_deposit)
-		@transaction.from_account = '-1'
+		@transaction.from_account_id = nil
 		@transaction.txn_type = 'deposit'
 		@transaction.status = 'pending'
 		if @transaction.save
-			flash[:notice] = 'Deposit was successful'
-			redirect_to :action => 'deposit'
+			flash[:notice] = 'Deposit was requested'
 		else
-			flash[:notice] = 'Sorry, Deposit was not successful'
-			render action:'new'
+			flash[:notice] = 'Sorry, Deposit was not requested'
 		end
-	end
-
-	def borrow
-		@transaction = Transaction.new
-		render 'borrow'
-	end
-
-	def lend
-		@transaction = Transaction.new
-		render 'lend'
+		redirect_to :action => 'deposit'
 	end
 
 	def withdraw
@@ -63,26 +49,72 @@ class TransactionsController < ApplicationController
 
 	def create_withdraw
 		@transaction = Transaction.new(transaction_params_withdraw)
-		@transaction.to_account = '-1'
+		@transaction.to_account_id = nil
 		@transaction.txn_type = 'withdrawal'
-		@transaction.status = 'pending'
-		if @transaction.save
-			flash[:notice] = 'Withdraw was successful'
-			redirect_to :action => 'withdraw'
+		if transaction_params_withdraw[:amount].to_d > 1000
+			@transaction.status = 'pending'
+			flash[:notice] = 'Withdraw was requested'
 		else
-			flash[:notice] = 'Sorry, Withdraw was not successful'
-			render action:'new'
+			@transaction.approve
 		end
+		if @transaction.save
+			flash[:notice] = 'Withdrawal was successful'
+		else
+			flash[:notice] = 'Sorry, withdrawal was not requested'
+		end
+		redirect_to :action => 'withdraw'
+	end
+
+	def borrow
+		@transaction = Transaction.new
+		set_accounts
+		render 'borrow'
+	end
+
+	def create_borrow
+		@transaction = Transaction.new(transaction_params_borrow_lend)
+		@transaction.txn_type = 'borrow'
+		if @transaction.approve
+				flash[:notice] = 'Borrow was successful'
+			else
+				flash[:notice] = 'Sorry, borrow was not successful'
+			end
+			redirect_to :action => 'borrow'
+	end
+
+	def lend
+		@transaction = Transaction.new
+		set_accounts
+		render 'lend'
+	end
+
+	def create_lend
+		@transaction = Transaction.new(transaction_params_borrow_lend)
+		@transaction.txn_type = 'send'
+		if @transaction.approve
+			flash[:notice] = 'Send successful'
+		else
+			flash[:notice] = 'Sorry, lend was not successful'
+		end
+		redirect_to :action => 'lend'
+	end
+
+	def manage
+		@transactions = Transaction.all_pending
 	end
 
 	def approve
-
+		if Transaction.find(params[:txn_id]).approve
+			flash[:notice] = 'Transaction approved'
+			redirect_to :action => 'manage'
+		end
 	end
+
 	def decline
-
-	end
-	def manage
-		@transactions = Transaction.all_pending
+		if Transaction.find(params[:txn_id]).decline
+			flash[:notice] = 'Transaction declined'
+			redirect_to :action => 'manage'
+		end
 	end
 
 end

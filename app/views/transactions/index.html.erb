@@ -1,12 +1,6 @@
 <% authUser = User.find(session[:user_id]) %>
 
-<% if authUser.is_admin %>
-
-    <h1>Pending Transactions</h1>
-
-    <%= render 'transactions/pending_transactions' , :transactions => @transactions.where({status:'pending'}) %>
-
-<% else %>
+<% if !authUser.is_admin %>
 
     <h1>My Transactions: TODO filter to this users! </h1>
 

@@ -1,7 +1,12 @@
+<% authUser = User.find(session[:user_id]) %>
+
 <h1> Make a withdrawal</h1>
-<hr>
-<hr>
-<h3 id="notice"><%= notice %></h3>
+<% if !notice.nil? %>
+    <hr>
+    <h3 id="notice"><%= notice %></h3>
+    <hr>
+<% end %>
+
 <div class="container">
   <%= form_for @transaction,:url => { :action => :create_withdraw} do |f| %>
       <% if @transaction.errors.any? %>
@@ -22,7 +27,7 @@
       <hr>
       <div class="field">
         <b>Account ID to withdraw from: </b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <%= f.select :from_account, options_for_select(Account.all.map {|a| a.account_number}), {}, {:multiple => false} %>
+        <%= f.collection_select :from_account_id, Account.where({user_id:authUser.id}), :id , :id, prompt: true %>
       </div>
       <hr>
       <div class="field">
