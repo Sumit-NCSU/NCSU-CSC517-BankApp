@@ -1,19 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  txnType: MyString
+  txn_type: Deposit
   amount: 9.99
-  formAc: one
-  toAc: one
-  startDate: 2017-02-19 03:15:03
-  effectiveDate: 2017-02-19 03:15:03
+  start_date: 2017-02-19 03:15:03
+  effective_date: 2017-02-19 03:15:03
   status: MyString
 
 two:
-  txnType: MyString
+  txn_type: Withdraw
   amount: 9.99
-  formAc: two
-  toAc: two
-  startDate: 2017-02-19 03:15:03
-  effectiveDate: 2017-02-19 03:15:03
+  start_date: 2017-02-19 03:15:03
+  effective_date: 2017-02-19 03:15:03
   status: MyString

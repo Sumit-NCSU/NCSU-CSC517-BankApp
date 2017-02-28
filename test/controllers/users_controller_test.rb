@@ -1,7 +1,12 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @admin = users(:one)
+    @user = users(:two)
+  end
+  test 'should get new user path' do
+    get new_user_path
+    assert_response :success
+  end
 end

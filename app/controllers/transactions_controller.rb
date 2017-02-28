@@ -32,7 +32,7 @@ class TransactionsController < ApplicationController
 	def create_deposit
 		@transaction = Transaction.new(transaction_params_deposit)
 		@transaction.from_account_id = nil
-		puts 'SumitDebug:' + @transaction.to_account_id.to_s
+		puts 'SumitDebug:----------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' + transaction_params_withdraw[:to_account_id].to_s
 		@transaction.txn_type = 'deposit'
 		@transaction.status = 'pending'
 		if @transaction.save
@@ -52,13 +52,19 @@ class TransactionsController < ApplicationController
 		msg = nil
 		@transaction = Transaction.new(transaction_params_withdraw)
 		@transaction.to_account_id = nil
-		puts 'SumitDebug:' + @transaction.from_account_id.to_s
+    @transaction.from_account_id = transaction_params_withdraw[:from_account_id].to_i
+    puts 'SumitDebug:----------------->>>>>>>>>>>>>>>transaction_params_withdraw[:from_account_id]>>>>>>>>>>>>>>>>>' + transaction_params_withdraw[:from_account_id].to_s
 		@transaction.txn_type = 'withdrawal'
 		if transaction_params_withdraw[:amount].to_d > 1000
 			@transaction.status = 'pending'
 			msg = 'Withdrawal was requested'
 		else
 			msg = 'Withdrawal was successful'
+      puts 'SumitDebug:----------------->>>>>>>>>>>>>>>>to_account_id>>>>>>>>>>>>>>>>' + @transaction.to_account_id.to_s
+      puts 'SumitDebug:----------------->>>>>>>>>>>>>>>>from_account_id>>>>>>>>>>>>>>>>' + @transaction.from_account_id.to_s
+      puts 'SumitDebug:----------------->>>>>>>>>>>>>>>>amount>>>>>>>>>>>>>>>>' + @transaction.amount.to_s
+      puts 'SumitDebug:----------------->>>>>>>>>>>>>>>>status>>>>>>>>>>>>>>>>' + @transaction.status.to_s
+      puts 'SumitDebug:----------------->>>>>>>>>>>>>>>>txn_type>>>>>>>>>>>>>>>>' + @transaction.txn_type.to_s
 			@transaction.approve
 		end
 		if @transaction.save
