@@ -32,6 +32,7 @@ class TransactionsController < ApplicationController
 	def create_deposit
 		@transaction = Transaction.new(transaction_params_deposit)
 		@transaction.from_account_id = nil
+		puts 'SumitDebug:' + @transaction.to_account_id.to_s
 		@transaction.txn_type = 'deposit'
 		@transaction.status = 'pending'
 		if @transaction.save
@@ -51,6 +52,7 @@ class TransactionsController < ApplicationController
 		msg = nil
 		@transaction = Transaction.new(transaction_params_withdraw)
 		@transaction.to_account_id = nil
+		puts 'SumitDebug:' + @transaction.from_account_id.to_s
 		@transaction.txn_type = 'withdrawal'
 		if transaction_params_withdraw[:amount].to_d > 1000
 			@transaction.status = 'pending'
