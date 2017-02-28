@@ -27,7 +27,7 @@
       <hr>
       <div class="field">
         <b>Account ID to deposit to </b>
-        <%= f.collection_select :to_account_id, Account.where({user_id:authUser.id}), :id , :id, prompt: true %>
+        <%= f.collection_select :to_account, Account.where({user_id:authUser.id}), :id , :id %>
       </div>
       <hr>
       <div class="field">
