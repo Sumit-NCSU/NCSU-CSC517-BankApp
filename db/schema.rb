@@ -45,8 +45,6 @@ ActiveRecord::Schema.define(version: 20170221002902) do
     t.string   "status"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.index ["from_account_id"], name: "index_transactions_on_from_account_id"
-    t.index ["to_account_id"], name: "index_transactions_on_to_account_id"
   end
 
   create_table "users", force: :cascade do |t|
