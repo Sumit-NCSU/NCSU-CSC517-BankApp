@@ -2,12 +2,14 @@
 
 <% if !authUser.is_admin %>
 
-    <h1>My Transactions: TODO filter to this users! </h1>
+    <h1>My Transactions</h1>
 
     <table class="table table-striped">
       <tr>
         <th>Transaction Date</th>
         <th>Transaction Type</th>
+        <th>From Account</th>
+        <th>To Account</th>
         <th>Amount</th>
         <th>Status</th>
         <th>Actions</th>
@@ -16,12 +18,14 @@
           <tr>
             <td><%= transaction.effective_date %></td>
             <td><%= transaction.txn_type %></td>
+            <td><%= transaction.from_account_id %></td>
+            <td><%= transaction.to_account_id %></td>
             <td><%= transaction.amount %></td>
             <td><%= transaction.status %></td>
-            <% if transaction.status = 'Pending' %>
-                <td>Cancel</td>
+            <% if transaction.status.downcase == 'pending' %>
+                <td><%= link_to 'Cancel', :controller => :transactions, :action => :destroy %></td>
             <% else %>
-                <td></td>
+                <td>Completed</td>
             <% end %>
           </tr>
       <% end %>

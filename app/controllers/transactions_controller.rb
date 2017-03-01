@@ -10,11 +10,22 @@ class TransactionsController < ApplicationController
 		params.require(:transaction).permit(:from_account_id, :to_account_id, :amount)
 	end
 	def index
-		@transactions = Transaction.all
+		@transactions = Transaction.where('from_account_id in (select id from accounts where user_id = ?) or to_account_id in (select id from accounts where user_id = ?)', session[:user_id], session[:user_id])
 	end
 
 	def show
 		@transaction = Transaction.find(params[:id])
+	end
+
+  #Cancel transaction not working
+	def destroy
+		@transaction = Transaction.find(params[:id])
+		if @transaction.destroy
+			redirect_to :controller => :transactions, :action => :index, notice: 'Transaction was successfully cancelled.'
+		else
+			render :controller => :transactions, :action => :index, notice: 'Unable to cancel transaction.'
+    end
+    render :controller => :transactions, :action => :index
 	end
 
 	def set_accounts
