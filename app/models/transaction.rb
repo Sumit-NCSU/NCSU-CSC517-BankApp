@@ -30,6 +30,7 @@ class Transaction < ApplicationRecord
         from_account.save
     end
     self.status = 'approved'
+    self.effective_date = DateTime.now
     self.save
   end
 
