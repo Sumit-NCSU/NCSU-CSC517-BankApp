@@ -21,11 +21,10 @@ class TransactionsController < ApplicationController
 	def destroy
 		@transaction = Transaction.find(params[:id])
 		if @transaction.destroy
-			redirect_to :controller => :transactions, :action => :index, notice: 'Transaction was successfully cancelled.'
+			redirect_to :action => :index, notice: 'Transaction was successfully cancelled.'
 		else
-			render :controller => :transactions, :action => :index, notice: 'Unable to cancel transaction.'
+			redirect_to :action => :index, notice: 'Unable to cancel transaction.'
 		end
-		render :controller => :transactions, :action => :index
 	end
 
 	def set_accounts
