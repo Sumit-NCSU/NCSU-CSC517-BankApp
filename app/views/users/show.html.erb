@@ -16,6 +16,7 @@
 </table>
 <h3>Sent Transactions</h3>
 <% user_accounts = @user.accounts.map{|a|a.id}%>
+<% puts 'Sumit >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' + user_accounts.to_s%>
 <%= render 'transactions/transaction_table', transactions: Transaction.select{|t| user_accounts.include? t.from_account_id} %>
 <br>
 
