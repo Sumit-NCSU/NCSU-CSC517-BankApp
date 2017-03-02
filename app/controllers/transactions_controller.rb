@@ -10,7 +10,7 @@ class TransactionsController < ApplicationController
 		params.require(:transaction).permit(:from_account_id, :to_account_id, :amount)
 	end
 	def index
-		@transactions = Transaction.where('from_account_id in (select id from accounts where user_id = ?) or to_account_id in (select id from accounts where user_id = ?) ORDER BY status DESC', session[:user_id], session[:user_id])
+		@transactions = Transaction.where('from_account_id in (select id from accounts where user_id = ?) or to_account_id in (select id from accounts where user_id = ?)', session[:user_id], session[:user_id]).order(:status).reverse_order
 	end
 
 	def show
