@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :accounts
   has_and_belongs_to_many :friends,
                           class_name: "User",
                           foreign_key: "friend1_id",
