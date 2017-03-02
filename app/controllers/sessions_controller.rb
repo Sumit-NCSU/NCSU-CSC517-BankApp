@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_action :save_login_state, :only => [:new, :create]
 
   def new
-    render 'new', :layout => false
+    render 'new', :layout => 'cover_layout'
   end
 
   def create

@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 	
 	def new
 		@user = User.new
+		render 'new', :layout => 'cover_layout'
 	end
 
 	def new_admin

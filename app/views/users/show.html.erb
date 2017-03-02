@@ -15,11 +15,12 @@
   </tr>
 </table>
 <h3>Sent Transactions</h3>
-<%= render 'transactions/transaction_table'%>
+<% user_accounts = @user.accounts.map{|a|a.id}%>
+<%= render 'transactions/transaction_table', transactions: Transaction.select{|t| user_accounts.include? t.from_account_id} %>
 <br>
 
 <h3>Received Transactions</h3>
-<%= render 'transactions/transaction_table'%>
+<%= render 'transactions/transaction_table', transactions: Transaction.select{|t| user_accounts.include? t.to_account_id} %>
 <br>
 
 <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure you want to delete this user?' } %> |

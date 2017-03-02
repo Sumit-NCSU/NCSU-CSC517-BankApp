@@ -1,12 +1,18 @@
 <% @page_title = 'Sign Up' %>
-<h1>Sign Up</h1>
+<div class="container" align="center">
+  <hr>
+  <h1 align="center"><strong>Sign Up</strong></h1>
+  <hr>
 <p>
   <%= form_for @user do |f|%>
-    <p> Name: <br> <%= f.text_field :name %> </p>
-    <p> Email: <br> <%= f.text_field :email %> </p>
-    <p> Password: <br> <%= f.password_field :password %> </p>
-    <p> Confirm Password: <br> <%= f.password_field :password %> </p>
-    <%= f.submit :Signup %>
+    <p> Name: &nbsp &nbsp<%= f.text_field :name %> </p>
+    <p> Email: &nbsp &nbsp <%= f.text_field :email %> </p>
+    <p> Password: &nbsp &nbsp <%= f.password_field :password %> </p>
+    <p> Confirm Password: &nbsp &nbsp <%= f.password_field :password %> </p>
+      <br>
+    <%= f.submit :Signup, :class => 'btn btn-danger btn-lg' %>
+      <br> <br>
+      <%= link_to 'Back to Home', login_path, :class => 'btn btn-primary btn-lg' %>
 <% end %>
 <% if @user.errors.any? %>
     <% @user.errors.full_messages.each do |error_message| %>
@@ -14,3 +20,6 @@
     <% end %>
 <% end %>
 </p>
+
+
+</div>
