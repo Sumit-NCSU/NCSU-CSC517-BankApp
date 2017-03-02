@@ -23,11 +23,11 @@
 </p>
 
 <b>Sent Transactions</b>
-<%= render 'transactions/transaction_table', :transactions => @account.sent_transactions %>
+<%= render 'transactions/transaction_table', transactions: @account.sent_transactions %>
 <br>
 
 <b>Received Transactions</b>
-<%= render 'transactions/transaction_table', :transactions => @account.received_transactions %>
+<%= render 'transactions/transaction_table', transactions: @account.received_transactions %>
 <br>
 
 <%= link_to 'Edit', edit_account_path(@account) %> |
