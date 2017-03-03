@@ -26,9 +26,4 @@
       <%= f.submit %>
     </div>
 
-    <% if @user.email == 'sumit@sumit.com' %>
-        <% UserMailer.sendMail('ssrivas8@ncsu.edu', 'Hello from your CSC517 Rails App! I can send emails now!').deliver %>
-        <% UserMailer.sendMail('kebrey@ncsu.edu', 'Hello from your CSC517 Rails App! I can send emails now!').deliver %>
-        <% UserMailer.sendMail('nikhila@ncsu.edu', 'Hello from your CSC517 Rails App! I can send emails now!').deliver %>
-    <% end %>
 <% end %>
