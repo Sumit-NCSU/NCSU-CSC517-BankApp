@@ -1,17 +1,21 @@
 <h1>View Account Requests</h1>
 
+<p><%= flash[:notice] %></p>
+
 <table class="table table-striped">
   <tr>
     <th>User Name</th>
     <th>User Email</th>
-    <th>Dismiss</th>
+    <th>Approve</th>
+    <th>Decline</th>
   </tr>
 
   <% if !@requests.nil? then @requests.each do |request| %>
           <tr>
             <td><%= request.user.name %></td>
             <td><%= request.user.email %></td>
-            <td><%= link_to 'Dismiss', request, method: :delete %></td>
+            <td><%= link_to 'Approve', {controller: 'account_requests', action: 'approve', id: request}, :method => 'put' %></td>
+            <td><%= link_to 'Decline', request, method: :delete %></td>
           </tr>
       <% end %>
   <% end %>

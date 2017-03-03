@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   put 'decline' => 'transactions#decline'
   get 'friends/search' => 'friends#search'
   post 'transactions/destroy' => 'transactions#destroy'
+  put 'account_requests/approve' => 'account_requests#approve'
 
   resources :users
   resources :accounts

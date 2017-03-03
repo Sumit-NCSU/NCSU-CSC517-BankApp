@@ -20,4 +20,18 @@ class AccountRequestsController < ApplicationController
       redirect_to account_requests_path, notice: 'Request was not dismissed.'
     end
   end
+
+  def approve
+    @request = AccountRequest.find(params[:id])
+    account = Account.new
+    account.user = @request.user
+    account.status = 'active'
+    if account.save
+      if @request.destroy
+        redirect_to account_requests_path, notice: 'Request was successfully approved.'
+      else
+        redirect_to account_requests_path, notice: 'Request was not approved.'
+      end
+    end
+  end
 end

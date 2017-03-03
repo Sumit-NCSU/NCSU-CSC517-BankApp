@@ -1,7 +1,6 @@
 <% authUser = User.find(session[:user_id]) %>
-
 <h1> Make a deposit</h1>
-
+<hr>
 <% if !notice.nil? %>
 <hr>
 <h3 id="notice"><%= notice %></h3>
@@ -36,7 +35,7 @@
       </div>
       <hr>
       <div class="actions">
-        <%= f.submit :value =>  'Deposit' %>
+        <%= f.submit :value =>  'Deposit',:class => 'btn btn-success btn-lg'%>
       </div>
 
   <% end %>
