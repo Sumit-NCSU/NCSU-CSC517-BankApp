@@ -42,7 +42,7 @@ class Transaction < ApplicationRecord
     elsif txn_type.to_s.downcase == 'borrow'
       msg = "borrowing amount #{amount} was approved from account #{from_account_id} to account #{to_account_id}!"
     end
-    UserMailer.sendMail(userEmail,msg)
+    UserMailer.sendMail(userEmail,msg).deliver
   end
 
   def decline(userEmail)
@@ -57,7 +57,7 @@ class Transaction < ApplicationRecord
     elsif txn_type.to_s.downcase == 'borrow'
       msg = "borrowing amount #{amount} was declined from account #{from_account_id} to account #{to_account_id}!"
     end
-    UserMailer.sendMail(userEmail,msg)
+    UserMailer.sendMail(userEmail,msg).deliver
   end
 
 end
