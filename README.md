@@ -4,19 +4,21 @@
 
 CSC517-Object Oriented Design and Development
 
-Requirement Document: [Requirements](https://github.ncsu.edu/kebrey/CSC517-BankApp/wiki/Requirements)
+Production Deployment: [BankApplication](https://intense-garden-50741.herokuapp.com)
 
-How to user Guide: [How to Use](https://github.ncsu.edu/kebrey/CSC517-BankApp/wiki/How-to-Use-our-Application)
+Requirement Document: [Functionality](https://github.ncsu.edu/kebrey/CSC517-BankApp/wiki/Requirements)
+
+How to use Guide: [How to Use](https://github.ncsu.edu/kebrey/CSC517-BankApp/wiki/How-to-Use-our-Application)
 
 Assumptions made in the Application: [Assumptions](https://github.ncsu.edu/kebrey/CSC517-BankApp/wiki/Assumptions)
 
-Default Admin Credentials:
-Email: admin@ncsu.edu
-Password: password
+* Default (super) Admin Credentials:
+    * Email: admin@ncsu.edu
+    * Password: password
 
-Default User Credentials:
-Email: user@ncsu.edu
-Password: password
+* Default User Credentials:
+    * Email: user@ncsu.edu
+    * Password: password
 
 Watch the below Video for instructions on how to use the application:
 
@@ -32,21 +34,23 @@ Watch the below Video for instructions on how to use the application:
   *   Gemfile
   *   /config/environment/production.rb
 
-* Database creation: 
-  *   PostgreSQL on Heroku Production.
-  *   Sqlite3 on local Development and Testing.
+* Database: 
+  *   PostgreSQL on Heroku Production environment.
+  *   Sqlite3 on local Development and Testing environments.
 
 * Database initialization is done as follows (on production):
   *   > heroku run rake db:migrate --for migrating the database
   *   > heroku run rake db:seed --for seeding the database
 
 * How to run the test suite:
-  *   Test Files located at: /test
-  *   To run test, on Windws:
-      * open command prompt at the application's bin folder and type following command:
+  *   Test Files for controller and models is located at:
+      * /test/controllers/sessions_controller_test.rb
+      * /test/controllers/users_controller_test.rb
+      * /test/models/account_test.rb
+      * /test/models/user_test.rb
+  *   To run test, on Windows:
+    * open command prompt at the application's bin folder and type following command:
       *    > rails test
-
-* Services (job queues, cache servers, search engines, etc.): NA
 
 * Deployment instructions: Deployment on Heroku done using the following Guide:
   *   https://devcenter.heroku.com/articles/getting-started-with-rails5#local-workstation-setup
