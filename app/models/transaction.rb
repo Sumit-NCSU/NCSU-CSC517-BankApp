@@ -32,11 +32,32 @@ class Transaction < ApplicationRecord
     self.status = 'approved'
     self.effective_date = DateTime.now
     self.save
+    msg = nil
+    if txn_type.to_s.downcase == 'withdrawal'
+      msg = "withdrawal of amount #{amount} was approved from account #{from_account_id}!"
+    elsif txn_type.to_s.downcase == 'deposit'
+      msg = "deposit of amount #{amount} was approved to account #{to_account_id}!"
+    elsif txn_type.to_s.downcase == 'send'
+      msg = "sending amount #{amount} was approved from account #{from_account_id} to account #{to_account_id}!"
+    elsif txn_type.to_s.downcase == 'borrow'
+      msg = "borrowing amount #{amount} was approved from account #{from_account_id} to account #{to_account_id}!"
+    end
+    UserMailer.sendMail(User.find(session[:user_id]),msg)
   end
 
   def decline
     self.status = 'declined'
     self.save
+    if txn_type.to_s.downcase == 'withdrawal'
+      msg = "withdrawal of amount #{amount} was declined from account #{from_account_id}!"
+    elsif txn_type.to_s.downcase == 'deposit'
+      msg = "deposit of amount #{amount} was declined to account #{to_account_id}!"
+    elsif txn_type.to_s.downcase == 'send'
+      msg = "sending amount #{amount} was declined from account #{from_account_id} to account #{to_account_id}!"
+    elsif txn_type.to_s.downcase == 'borrow'
+      msg = "borrowing amount #{amount} was declined from account #{from_account_id} to account #{to_account_id}!"
+    end
+    UserMailer.sendMail(User.find(session[:user_id]),msg)
   end
 
 end
