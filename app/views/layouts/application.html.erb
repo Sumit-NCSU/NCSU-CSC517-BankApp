@@ -9,17 +9,13 @@
 </head>
 
 <body class="container">
-<div align="center"><img src="..\bank_banner.png" alt="bank logo" width="50%" /> </div>
-<nav class="navbar navbar-default ">
+<div align="center"><%=image_tag('bank_banner.png', width: '50%', alt: 'banner')%></div>
+<hr>
   <div class="container-fluid">
-    <a class="navbar-brand" href="/home">Home</a>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="nav-item <%= 'active' if current_page?(logout_path)%>"><%= link_to 'Logout', logout_path, class: "nav-link" %></li>
-      </ul>
-    </div>
+     Home: <%= link_to image_tag('home_icon.png', size:'30x30', alt:'Home'), home_path %> &nbsp &nbsp
+     Logout: <%= link_to image_tag('power_button.png', size:'30x30', alt:'Logout'), logout_path %>
   </div>
-</nav>
+<hr>
 
 <%= yield %>
 </body>
