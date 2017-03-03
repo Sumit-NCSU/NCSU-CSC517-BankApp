@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
   def sendMail(email, message)
     from = Email.new(email: 'csc517bank@example.com')
     to = Email.new(email: email)
-    subject = 'Transaction Alert from CSC517 Bank'
+    subject = 'Transaction Alert from CSC517 BankApp'
     content = Content.new(type: 'text/plain', value: message)
     mail = Mail.new(from, subject, to, content)
 
