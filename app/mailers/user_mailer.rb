@@ -6,6 +6,7 @@ class UserMailer < ApplicationMailer
   include SendGrid
 
   def sendMail(email, message)
+    puts "################################## SENDING EMAIL TO: #{email} The Mail body is: #{message} ##################################"
     from = Email.new(email: 'csc517bank@example.com')
     to = Email.new(email: email)
     subject = 'Transaction Alert from CSC517 BankApp'
