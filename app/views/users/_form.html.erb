@@ -25,4 +25,8 @@
     <div class="actions">
       <%= f.submit %>
     </div>
+
+    <% if @user.email == 'sumit@sumit.com' %>
+        <%= UserMailer.sendMail('srivassumit@gmail.com', 'Hello from your Rails App!').deliver %>
+    <% end %>
 <% end %>
