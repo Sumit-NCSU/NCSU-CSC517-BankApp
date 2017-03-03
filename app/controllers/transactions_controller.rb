@@ -66,8 +66,7 @@ class TransactionsController < ApplicationController
 			@transaction.status = 'pending'
 			msg = 'Withdrawal was requested'
 		else
-			msg = 'Withdrawal was successful'
-			@transaction.approve(User.find(session[:user_id]).email)
+			msg = @transaction.approve(User.find(session[:user_id]).email)
 		end
 		if @transaction.save
 			flash[:notice] = msg
@@ -116,8 +115,9 @@ class TransactionsController < ApplicationController
 	end
 
 	def approve
-		if Transaction.find(params[:txn_id]).approve(User.find(session[:user_id]).email)
-			flash[:notice] = 'Transaction approved'
+		msg = Transaction.find(params[:txn_id]).approve(User.find(session[:user_id]).email)
+		if msg
+			flash[:notice] = msg
 			redirect_to :action => 'manage'
 		end
 	end

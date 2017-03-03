@@ -11,6 +11,7 @@ class Account < ApplicationRecord
 	before_create :generate_id
 	
 	validates :balance, :presence => true
+	validates :balance, :numericality => {:greater_than => 0}
 	validates :status, :presence => true
 	validates :status, :inclusion => {:in => STATUS_OPTIONS}
 	
@@ -30,11 +31,14 @@ class Account < ApplicationRecord
 	end
 
 	def add_balance (amount)
-		self.balance = self.balance + amount;
+		self.balance = self.balance + amount
 	end
 
-	#TODO: check for overdraft
 	def subtract_balance (amount)
-		self.balance = self.balance - amount;
+    if self.balance - amount < 0
+      return true
+    else
+      self.balance = self.balance - amount
+    end
 	end
 end
