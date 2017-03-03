@@ -12,7 +12,7 @@ class Transaction < ApplicationRecord
     self.where(:status => 'pending')
   end
 
-  def approve
+  def approve(userEmail)
     to_account = nil
     from_account = nil
     if self.to_account_id != nil
@@ -42,10 +42,10 @@ class Transaction < ApplicationRecord
     elsif txn_type.to_s.downcase == 'borrow'
       msg = "borrowing amount #{amount} was approved from account #{from_account_id} to account #{to_account_id}!"
     end
-    UserMailer.sendMail(User.find(session[:user_id]),msg)
+    UserMailer.sendMail(userEmail,msg)
   end
 
-  def decline
+  def decline(userEmail)
     self.status = 'declined'
     self.save
     if txn_type.to_s.downcase == 'withdrawal'
@@ -57,7 +57,7 @@ class Transaction < ApplicationRecord
     elsif txn_type.to_s.downcase == 'borrow'
       msg = "borrowing amount #{amount} was declined from account #{from_account_id} to account #{to_account_id}!"
     end
-    UserMailer.sendMail(User.find(session[:user_id]),msg)
+    UserMailer.sendMail(userEmail,msg)
   end
 
 end

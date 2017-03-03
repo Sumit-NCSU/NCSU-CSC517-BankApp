@@ -67,7 +67,7 @@ class TransactionsController < ApplicationController
 			msg = 'Withdrawal was requested'
 		else
 			msg = 'Withdrawal was successful'
-			@transaction.approve
+			@transaction.approve(User.find(session[:user_id]).email)
 		end
 		if @transaction.save
 			flash[:notice] = msg
@@ -86,7 +86,7 @@ class TransactionsController < ApplicationController
 	def create_borrow
 		@transaction = Transaction.new(transaction_params_borrow_lend)
 		@transaction.txn_type = 'borrow'
-		if @transaction.approve
+		if @transaction.approve(User.find(session[:user_id]).email)
 				flash[:notice] = 'Borrow was successful'
 			else
 				flash[:notice] = 'Sorry, borrow was not successful'
@@ -103,7 +103,7 @@ class TransactionsController < ApplicationController
 	def create_lend
 		@transaction = Transaction.new(transaction_params_borrow_lend)
 		@transaction.txn_type = 'send'
-		if @transaction.approve
+		if @transaction.approve(User.find(session[:user_id]).email)
 			flash[:notice] = 'Send successful'
 		else
 			flash[:notice] = 'Sorry, lend was not successful'
@@ -116,14 +116,14 @@ class TransactionsController < ApplicationController
 	end
 
 	def approve
-		if Transaction.find(params[:txn_id]).approve
+		if Transaction.find(params[:txn_id]).approve(User.find(session[:user_id]).email)
 			flash[:notice] = 'Transaction approved'
 			redirect_to :action => 'manage'
 		end
 	end
 
 	def decline
-		if Transaction.find(params[:txn_id]).decline
+		if Transaction.find(params[:txn_id]).decline(User.find(session[:user_id]).email)
 			flash[:notice] = 'Transaction declined'
 			redirect_to :action => 'manage'
 		end
