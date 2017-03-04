@@ -1,4 +1,40 @@
-<h1>Manage Pending Transactions</h1>
-<p><%= flash[:notice] %></p>
-<%= render 'pending_transactions'%>
+<% authUser = User.find(session[:user_id]) %>
+
+<% if authUser.is_admin %>
+
+  <h1>Manage Pending Transactions</h1>
+  <p><%= flash[:notice] %></p>
+  <%= render 'pending_transactions'%>
+
+<% else %>
+
+  <h1>Borrow Requests</h1>
+  <p><%= flash[:notice] %></p>
+  <table class="table table-striped">
+    <tr>
+      <th>From Account</th>
+      <th>To</th>
+      <th>Amount</th>
+      <th>Approve</th>
+      <th>Decline</th>
+    </tr>
+    <% @borrow_requests.each do |transaction| %>
+        <tr>
+          <td><%= transaction.from_account_id %></td>
+          <td><%= Account.find(transaction.to_account_id).user.name %></td>
+          <td><%= transaction.amount %></td>
+          <td>
+            <%= link_to 'Approve', {:controller => :transactions, :action => :approve,
+                                    :txn_id => transaction.id }, {:method => :put} %>
+          </td>
+          <td>
+            <%= link_to 'Decline', {:controller => :transactions, :action => :decline,
+                                    :txn_id => transaction.id }, {:method => :put} %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+
+<% end %>
+
 <%= link_to 'Back', home_path %>

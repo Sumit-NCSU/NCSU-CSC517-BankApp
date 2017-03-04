@@ -22,8 +22,9 @@
       <li><%= link_to 'View Transactions', transactions_path  %></li>
       <li><%= link_to 'Make a deposit', :controller => :transactions, :action => :deposit %> </li>
       <li><%= link_to 'Make a withdrawal', :controller => :transactions, :action => :withdraw  %> </li>
-      <li><%= link_to 'Borrow from a friend', :controller => :transactions, :action => :borrow %> </li>
       <li><%= link_to 'Transfer to another account', :controller => :transactions, :action => :lend %> </li>
+      <li><%= link_to 'Borrow from a friend', :controller => :transactions, :action => :borrow %> </li>
+      <li><%= link_to 'Manage Borrow Requests', :controller => :transactions, :action => :manage  %></li>
 
   <% end %>
 </ul>

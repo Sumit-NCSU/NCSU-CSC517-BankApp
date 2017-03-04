@@ -85,10 +85,11 @@ class TransactionsController < ApplicationController
 	def create_borrow
 		@transaction = Transaction.new(transaction_params_borrow_lend)
 		@transaction.txn_type = 'borrow'
-		if @transaction.approve(User.find(session[:user_id]).email)
-				flash[:notice] = 'Borrow was successful'
+		@transaction.status = 'pending'
+		if @transaction.save
+				flash[:notice] = 'Borrow request sent'
 			else
-				flash[:notice] = 'Sorry, borrow was not successful'
+				flash[:notice] = 'Sorry, borrow request was not successful'
 			end
 			redirect_to :action => 'borrow'
 	end
@@ -112,6 +113,7 @@ class TransactionsController < ApplicationController
 
 	def manage
 		@transactions = Transaction.all_pending
+		@borrow_requests = Transaction.where({status:'pending'}).where({txn_type:'borrow'}).select{|txn| User.find(session[:user_id]).accounts.include? txn.from_account}
 	end
 
 	def approve
