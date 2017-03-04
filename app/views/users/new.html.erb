@@ -5,10 +5,10 @@
   <hr>
 <p>
   <%= form_for @user do |f|%>
-    <p> Name: &nbsp &nbsp<%= f.text_field :name %> </p>
-    <p> Email: &nbsp &nbsp <%= f.text_field :email %> </p>
-    <p> Password: &nbsp &nbsp <%= f.password_field :password %> </p>
-    <p> Confirm Password: &nbsp &nbsp <%= f.password_field :password %> </p>
+    <p> Name<text style="color:#FF0000;"> <%= ' *' %></text> : &nbsp &nbsp<%= f.text_field :name %> </p>
+    <p> Email<text style="color:#FF0000;"> <%= ' *' %></text> : &nbsp &nbsp <%= f.text_field :email %> </p>
+    <p> Password<text style="color:#FF0000;"> <%= ' *' %></text> : &nbsp &nbsp <%= f.password_field :password %> </p>
+    <p> Confirm Password<text style="color:#FF0000;"> <%= ' *' %></text> : &nbsp &nbsp <%= f.password_field :password %> </p>
       <br>
     <%= f.submit :Signup, :class => 'btn btn-danger btn-lg' %>
       <br> <br>
