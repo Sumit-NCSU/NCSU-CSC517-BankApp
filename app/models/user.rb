@@ -1,10 +1,11 @@
 class User < ApplicationRecord
-  has_many :accounts
+  has_many :accounts, :dependent => :destroy
   has_and_belongs_to_many :friends,
                           class_name: "User",
                           foreign_key: "friend1_id",
                           association_foreign_key: "friend2_id",
-                          join_table: "friends"
+                          join_table: "friends",
+                          :dependent => :destroy
 	EMAIL_REGEX = /\A(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})\z/i
 	validates :name, :presence => true
 	validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX

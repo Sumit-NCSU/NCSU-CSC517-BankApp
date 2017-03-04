@@ -4,9 +4,9 @@ class Account < ApplicationRecord
 	#attr_accessor balance, :status, :users
 	belongs_to :user
 	has_many :received_transactions, class_name: "Transaction",
-					 foreign_key: "to_account_id"
+					 foreign_key: "to_account_id", :dependent => :destroy
 	has_many :sent_transactions, class_name: "Transaction",
-					 foreign_key: "from_account_id"
+					 foreign_key: "from_account_id", :dependent => :destroy
 	
 	before_create :generate_id
 	
