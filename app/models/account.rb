@@ -11,7 +11,7 @@ class Account < ApplicationRecord
 	before_create :generate_id
 	
 	validates :balance, :presence => true
-	validates :balance, :numericality => {:greater_than => 0}
+	validates :balance, :numericality => {:greater_than_or_equal_to => 0}
 	validates :status, :presence => true
 	validates :status, :inclusion => {:in => STATUS_OPTIONS}
 	
